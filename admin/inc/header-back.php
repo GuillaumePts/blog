@@ -9,11 +9,12 @@
 </head>
 <body>
     <header>
+        <h1>Back-Office</h1>
     <nav>
         <ul>
-            <li><a href="../index.php">Front</a></li>
-            <li><a href="index.php">Back</a></li>
-            <li><a href="newpost.php">Ajouter article</a></li>
+            <li><a class="fondblanc" href="../index.php">Front</a></li>
+         
+            <li><a class="fondblanc" href="newpost.php">Ajouter article</a></li>
         </ul>
     </nav>
 

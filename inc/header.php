@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="stylesheet" href="assets/style.css">
+ 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./asset/style.css">
     <title>Front</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="admin/index.php">Admin</a></li>
+<header>
+        <h1>Front-Office</h1>
+    <nav>
+        <ul>
+         
+            <li><a class="fondblanc" href="http://localhost/blog/admin/index-back.php">Back</a></li>
+           
+        </ul>
+    </nav>
 
-            </ul>
-        </nav>
     </header>
     <div id="content">
     

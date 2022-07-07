@@ -23,19 +23,22 @@ if(!empty($_POST['submitted'])) {
     $title = trim(strip_tags($_POST['title']));
     $content = trim(strip_tags($_POST['content']));
     $auteur = trim(strip_tags($_POST['auteur']));
+    $status = trim(strip_tags($_POST['status']));
    
     // Validation
     $errors = validText($errors,$title,'title',3,100);
     $errors = validText($errors,$content,'content',10,1000);
     $errors = validText($errors, $auteur, 'auteur', 2, 50);
+    $errors = validText($errors, $status, 'status', 3, 10);
     
 
     if(count($errors) === 0) {
-        $sql = "INSERT INTO articles (title,content,auteur,created_at,modified_at) VALUES (:title,:content,:auteur,NOW(),NOW())";
+        $sql = "INSERT INTO articles (title,content,auteur,created_at,modified_at,status) VALUES (:title,:content,:auteur,NOW(),NOW()),:status";
         $query = $pdo->prepare($sql);
         $query->bindValue(':title',$title, PDO::PARAM_STR);
         $query->bindValue(':content',$content, PDO::PARAM_STR);
         $query->bindValue(':auteur',$auteur, PDO::PARAM_STR);
+        $query->bindValue(':status',$status, PDO::PARAM_STR);
     
         $query->execute();
         header('Location: newpost.php');
@@ -43,130 +46,96 @@ if(!empty($_POST['submitted'])) {
     }
 }
 
-
-
-
+$status = array(
+    'draft' => 'brouillon',
+    'publish' => 'Publié'
+);
 
 ?>
 
 
-<!-- ------------------------------------------------------------------------------- -->
-<!-- Partie css -->
-<!-- ------------------------------------------------------------------------------------------------------- -->
 
 
 
-<style>
-    *{padding: 0; margin:0;-webkit-box-sizing: border-box;box-sizing: border-box;font-family: monospace;font-size: 1rem;color:#666; text-shadow: 5px 5px 10px #202020,
-    -5px -5px 10px #464646; text-align: center; font-weight: 600;}
-    #newpost{
-          min-height: 100vh;
-          background-color: #333;
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center;
-          -webkit-box-align:center ;
-              -ms-flex-align:center ;
-                  align-items:center ;
-          -webkit-box-orient: vertical;
-          -webkit-box-direction: normal;
-              -ms-flex-direction: column;
-                  flex-direction: column;
-      }
-      form{
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-orient: vertical;
-          -webkit-box-direction: normal;
-              -ms-flex-direction: column;
-                  flex-direction: column;
-          -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center;
-          -webkit-box-align: center;
-              -ms-flex-align: center;
-                  align-items: center;
-          width: 50%;
-          
-      }
 
-      textarea{
-        margin-top: 10px;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    height: 100px;
-    -webkit-box-shadow: 5px 5px 10px #202020,
-    -5px -5px 10px #464646;
-            box-shadow: 5px 5px 10px #202020,
-    -5px -5px 10px #464646;
-    background-color: #333;
-    cursor: pointer;
-
-      }
-
-    
-
-      input{
-    margin-top: 10px;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    height: 30px;
-    -webkit-box-shadow: 5px 5px 10px #202020,
-    -5px -5px 10px #464646;
-            box-shadow: 5px 5px 10px #202020,
-    -5px -5px 10px #464646;
-    background-color: #333;
-    cursor: pointer;
-      }
-      label{
-    margin-top: 10px;
-      }
-
-      #submit{
-          margin-top: 30px;
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-      }
-
-      span{
-          color: #a70101;;
-      }
-</style>
 
 
 
 <!-- ----------------------------------------------------------------------------------------------- -->
 <!-- partie html -->
 <!-- --------------------------------------------------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style-back.css">
+    
+    <title>Document</title>
+</head>
+<body>
 
+<header>
 
+        <h1>Back-Office</h1>
+    <nav>
+        <ul>
+            <li><a class="fondblanc" href="../index.php">Front</a></li>
+            <li><a class="fondblanc" href="index-back.php">Back</a></li>
+           
+        </ul>
+    </nav>
+
+    
+</header>
 
 <div id="newpost">
 
-<h2>Ajouter un article</h2>
 
-<form action="" method="POST">
 
-<label for="title">Titre</label>
-<input type="text" name="title" id="title">
-<span class="error"></span>
+<h2 >Ajouter un article</h2>
 
-<label for="content">Titre</label>
-<textarea name="content" id="content" cols="30" rows="5" style="resize:none"></textarea>
-<span class="error"></span>
+<form action="" method="POST" novalidate>
 
-<label for="auteur">auteur (facultatif)</label>
-<input type="text" name="auteur" id="auteur">
-<span class="error"></span>
+<label  class="fondnoir "  for="title">Titre</label>
+<input class="fondnoir "  type="text" name="title" id="title">
+<span class="error"><?php if(!empty($errors['title'])) { echo $errors['title']; } ?></span>
 
-<input id="submit" type="submit" name="submitted" value="GO">
+<label class="fondnoir "  for="content">Contenu</label>
+<textarea class="fondnoir "  name="content" id="content" cols="30" rows="5" style="resize:none"></textarea>
+<span class="error"><?php if(!empty($errors['content'])) { echo $errors['content']; } ?></span>
+
+<label class="fondnoir "  for="auteur">auteur</label>
+<input class="fondnoir "  type="text" name="auteur" id="auteur">
+<span class="error"><?php if(!empty($errors['auteur'])) { echo $errors['auteur']; } ?></span>
+
+<?php
+        $status = array(
+            'draft' => 'brouillon',
+            'publish' => 'Publié'
+        );
+
+        ?>
+
+<label class="fondnoir" for="status">Status</label>
+<select  name="status">
+    <option value=""></option>
+    <?php foreach ($status as $key => $value) {
+        $selected = '';
+        if(!empty($_POST['status'])) {
+            if($_POST['status'] == $key) {
+                $selected = ' selected="selected"';
+            }
+        }
+
+?>
+ <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $value; ?></option>
+            <?php } ?>
+        </select>
+        <span class="error"><?php if(!empty($errors['status'])) { echo $errors['status']; } ?></span>
+
+<input  class="fondnoir " id="submit" type="submit" name="submitted" value="GO">
 </form>
 
 <script>
@@ -179,3 +148,7 @@ btn.style.transform='perspective(500px) translateZ(-100px)'}
 </script>
 
 </div>
+</body>
+</html>
+
+

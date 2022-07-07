@@ -6,7 +6,7 @@ require('../inc/request.php');
 
 include('inc/header-back.php'); ?>
 
-    <h1>coucou back</h1>
+    
 
 
 
