@@ -1,9 +1,60 @@
+
+
+<!-- ------------------------------------------------------------------------------- -->
+<!-- Partie php -->
+<!-- ---------------------------------------------------------------------------------- -->
+
 <?php
 
 
 
 
+
+
+require('../inc/pdo.php');
+require('../inc/function.php');
+require('../inc/request.php');
+
+// traitement Formulaire
+$success = false;
+$errors = array();
+if(!empty($_POST['submitted'])) {
+    // Faille XSS
+    $title = trim(strip_tags($_POST['title']));
+    $content = trim(strip_tags($_POST['content']));
+    $auteur = trim(strip_tags($_POST['auteur']));
+   
+    // Validation
+    $errors = validText($errors,$title,'title',3,100);
+    $errors = validText($errors,$content,'content',10,1000);
+    $errors = validText($errors, $auteur, 'auteur', 2, 50);
+    
+
+    if(count($errors) === 0) {
+        $sql = "INSERT INTO articles (title,content,auteur,created_at,modified_at) VALUES (:title,:content,:auteur,NOW(),NOW())";
+        $query = $pdo->prepare($sql);
+        $query->bindValue(':title',$title, PDO::PARAM_STR);
+        $query->bindValue(':content',$content, PDO::PARAM_STR);
+        $query->bindValue(':auteur',$auteur, PDO::PARAM_STR);
+    
+        $query->execute();
+        header('Location: newpost.php');
+        $success = true;
+    }
+}
+
+
+
+
+
 ?>
+
+
+<!-- ------------------------------------------------------------------------------- -->
+<!-- Partie css -->
+<!-- ------------------------------------------------------------------------------------------------------- -->
+
+
 
 <style>
     *{padding: 0; margin:0;-webkit-box-sizing: border-box;box-sizing: border-box;font-family: monospace;font-size: 1rem;color:#666; text-shadow: 5px 5px 10px #202020,
@@ -88,6 +139,14 @@
           color: #a70101;;
       }
 </style>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------- -->
+<!-- partie html -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+
+
 
 <div id="newpost">
 
