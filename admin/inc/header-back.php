@@ -13,6 +13,7 @@
         <ul>
             <li><a href="../index.php">Front</a></li>
             <li><a href="index.php">Back</a></li>
+            <li><a href="inc/newpost.php">Ajouter article</a></li>
         </ul>
     </nav>
 
