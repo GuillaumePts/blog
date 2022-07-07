@@ -146,6 +146,8 @@ height: 100px;
       box-shadow:var(--morphisme-);
 background-color: var(--back-);
 cursor: pointer;
+width: 250px;
+
 
 }
 
@@ -161,6 +163,7 @@ height: 30px;
       box-shadow: var(--morphisme-);
 background-color: var(--back-);
 cursor: pointer;
+width: 250px;
 }
 label{
 margin-top: 10px;
@@ -191,6 +194,7 @@ height: 30px;
       box-shadow: var(--morphisme-);
 background-color: var(--back-);
 cursor: pointer;
+width: 250px;
 }
 
 option{
