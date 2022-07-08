@@ -1,7 +1,7 @@
 <?php 
 
-require('./include/function.php');
-require('./include/pdo.php');
+require('./inc/function.php');
+require('./inc/pdo.php');
 
 $select_articles = "SELECT * FROM articles ORDER BY created_at DESC";
 $query = $pdo->prepare($select_articles);
@@ -13,9 +13,16 @@ $articles = $query->fetchAll();
 <?php include ('./inc/header.php'); ?>
 
 <h2>Listes des articles</h2>
-    <?php foreach ($articles as $article) { 
-        if($article[''])
-    }
+<?php foreach ($articles as $article) { 
+        if($article['status']==='publish'){?>
+
+<div id="card">
+    <p class="fondnoir"><?=$article['title']?></p>
+    <p class="fondnoir"><?=$article['auteur']?></p>
+    <p class="fondnoir"><?=$article['created_at']?></p>
+</div>
+<?php }
+    }; ?>
 
 
 
