@@ -15,7 +15,7 @@
         <nav>
             <ul>
                 <li><a class="fondblanc" href="../index.php">Front</a></li>
-                <li><a class="fondblanc" href="editpost.php">Editer-article</a></li>
+                <li><a class="fondblanc" href="liste-articles.php">Editer-article</a></li>
                 <li><a class="fondblanc" href="newpost.php">Ajouter-article</a></li>
             </ul>
         </nav>

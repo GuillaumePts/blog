@@ -113,7 +113,11 @@ ul{
 }
 
 #articles{
+    width: 100%;
+    display: flex;
     
+    justify-content:center;
+    align-items: center;
 }
 
 #newpost{
@@ -225,5 +229,10 @@ cursor: pointer;
 color: var(--font-);
 text-shadow: var(--morphisme-);
 text-align: center;
+}
+
+p{
+   width: 200px;
+   margin: 20px auto;
 }
 
