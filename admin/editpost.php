@@ -84,7 +84,7 @@ if(!empty($_POST['submitted'])) {
             <span class="error"><?php if(!empty($errors['title'])) { echo $errors['title']; } ?></span>
 
             <label class="fondnoir" for="content">Contenu</label>
-            <textarea class="fondnoir" name="content" id="content" cols="30" rows="5" style="resize:none" value="<?php echo $article['content'] ?>" ></textarea>
+            <textarea class="fondnoir" name="content" id="content" cols="30" rows="5" style="resize:none"  ><?php echo $article['content'] ?></textarea>
             <span class="error"><?php if(!empty($errors['content'])) { echo $errors['content']; } ?></span>
 
             <label class="fondnoir " for="auteur">auteur</label>
@@ -100,8 +100,8 @@ if(!empty($_POST['submitted'])) {
         ?>
 
             <label class="fondnoir" for="status">Status</label>
-            <select name="status" value="<?php echo $article['status'] ?>">
-                <option ></option>
+            <select name="status" >
+                <option ><?php echo $article['status'] ?></option>
                 <?php foreach ($status as $key => $value) {
         $selected = '';
         if(!empty($_POST['status'])) {
