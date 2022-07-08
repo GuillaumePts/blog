@@ -3,13 +3,22 @@ require('../inc/pdo.php');
 require('../inc/function.php');
 require('../inc/request.php');
 
-if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
+
+
+
+if(!empty($_GET['id']) && ctype_digit($_GET['id'])) {
     $id = $_GET['id'];
     $articles = "SELECT * FROM articles WHERE id = :id";
     $query = $pdo->prepare($articles);
     $query->bindValue(':id',$id, PDO::PARAM_INT);
     $query->execute();
     $article = $query->fetch();
+
+    $article = edit($id);
+    // debug($beer);
+    if(empty($article)) {
+        die('404');
+    }
 // debug($article);
 
 $errors = [];
@@ -40,8 +49,9 @@ if(!empty($_POST['submitted'])) {
     }
 }
 
+}else{
+    die('404');
 }
-
 
  ?><!DOCTYPE html>
 <html lang="fr">
