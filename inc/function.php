@@ -34,3 +34,8 @@ function getValue($key,$data = null){
     }
     return '';
 }
+
+function cleanXss(string $key)
+{
+    return trim(strip_tags($_POST[$key]));
+}

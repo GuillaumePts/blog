@@ -22,16 +22,8 @@ $articles = $query->fetchAll();
     <p class="fondnoir"><?=$article['title']?></p>
     <p class="fondnoir"><?=$article['auteur']?></p>
     <p class="fondnoir"><?=$article['created_at']?></p>
+    <a class="fondnoir" href="single.php">détail</a>
 </div>
  <?php  }
   
-
-
-
-
-
-
-
-
-
- include ('./inc/footer.php'); ?>
+  include ('./inc/footer.php'); ?>
