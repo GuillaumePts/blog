@@ -15,6 +15,7 @@
         <ul>
          
             <li><a class="fondblanc" href="http://localhost/blog/admin/index-back.php">Back</a></li>
+            <li><a class="fondblanc" href="./articles.php">Articles</a></li>
            
         </ul>
     </nav>

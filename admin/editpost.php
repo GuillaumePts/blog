@@ -14,7 +14,7 @@ if(!empty($_GET['id']) && ctype_digit($_GET['id'])) {
     $query->execute();
     $article = $query->fetch();
 
-    $article = edit($id);
+ 
     // debug($beer);
     if(empty($article)) {
         die('404');
