@@ -33,7 +33,7 @@ if(!empty($_POST['submitted'])) {
     
 
     if(count($errors) === 0) {
-        $sql = "INSERT INTO articles (title,content,auteur,created_at,modified_at,status) VALUES (:title,:content,:auteur,NOW(),NOW()),:status";
+        $sql = "INSERT INTO articles (title,content,auteur,created_at,modified_at,status) VALUES (:title,:content,:auteur,NOW(),NOW(),:status)";
         $query = $pdo->prepare($sql);
         $query->bindValue(':title',$title, PDO::PARAM_STR);
         $query->bindValue(':content',$content, PDO::PARAM_STR);
@@ -46,10 +46,6 @@ if(!empty($_POST['submitted'])) {
     }
 }
 
-$status = array(
-    'draft' => 'brouillon',
-    'publish' => 'Publié'
-);
 
 ?>
 
@@ -98,12 +94,12 @@ $status = array(
 
 <form action="" method="POST" novalidate>
 
-<label  class="fondnoir "  for="title">Titre</label>
-<input class="fondnoir "  type="text" name="title" id="title">
+<label  class="fondnoir"  for="title">Titre</label>
+<input class="fondnoir"  type="text" name="title" id="title">
 <span class="error"><?php if(!empty($errors['title'])) { echo $errors['title']; } ?></span>
 
-<label class="fondnoir "  for="content">Contenu</label>
-<textarea class="fondnoir "  name="content" id="content" cols="30" rows="5" style="resize:none"></textarea>
+<label class="fondnoir"  for="content">Contenu</label>
+<textarea class="fondnoir"  name="content" id="content" cols="30" rows="5" style="resize:none"></textarea>
 <span class="error"><?php if(!empty($errors['content'])) { echo $errors['content']; } ?></span>
 
 <label class="fondnoir "  for="auteur">auteur</label>
