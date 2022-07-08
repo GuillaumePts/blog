@@ -1,5 +1,3 @@
-
-
 <!-- ------------------------------------------------------------------------------- -->
 <!-- Partie php -->
 <!-- ---------------------------------------------------------------------------------- -->
@@ -62,51 +60,53 @@ if(!empty($_POST['submitted'])) {
 <!-- --------------------------------------------------------------------------------------------------- -->
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style-back.css">
-    
+
     <title>Document</title>
 </head>
+
 <body>
 
-<header>
+    <header>
 
         <h1>Back-Office</h1>
-    <nav>
-        <ul>
-            <li><a class="fondblanc" href="../index.php">Front</a></li>
-            <li><a class="fondblanc" href="index-back.php">Back</a></li>
-           
-        </ul>
-    </nav>
+        <nav>
+            <ul>
+                <li><a class="fondblanc" href="../index.php">Front</a></li>
+                <li><a class="fondblanc" href="index-back.php">Back</a></li>
 
-    
-</header>
-
-<div id="newpost">
+            </ul>
+        </nav>
 
 
+    </header>
 
-<h2 >Ajouter un article</h2>
+    <div id="newpost">
 
-<form action="" method="POST" novalidate>
 
-<label  class="fondnoir"  for="title">Titre</label>
-<input class="fondnoir"  type="text" name="title" id="title">
-<span class="error"><?php if(!empty($errors['title'])) { echo $errors['title']; } ?></span>
 
-<label class="fondnoir"  for="content">Contenu</label>
-<textarea class="fondnoir"  name="content" id="content" cols="30" rows="5" style="resize:none"></textarea>
-<span class="error"><?php if(!empty($errors['content'])) { echo $errors['content']; } ?></span>
+        <h2>Ajouter un article</h2>
 
-<label class="fondnoir "  for="auteur">auteur</label>
-<input class="fondnoir "  type="text" name="auteur" id="auteur">
-<span class="error"><?php if(!empty($errors['auteur'])) { echo $errors['auteur']; } ?></span>
+        <form action="" method="POST" novalidate>
 
-<?php
+            <label class="fondnoir" for="title">Titre</label>
+            <input class="fondnoir" type="text" name="title" id="title">
+            <span class="error"><?php if(!empty($errors['title'])) { echo $errors['title']; } ?></span>
+
+            <label class="fondnoir" for="content">Contenu</label>
+            <textarea class="fondnoir" name="content" id="content" cols="30" rows="5" style="resize:none"></textarea>
+            <span class="error"><?php if(!empty($errors['content'])) { echo $errors['content']; } ?></span>
+
+            <label class="fondnoir " for="auteur">auteur</label>
+            <input class="fondnoir " type="text" name="auteur" id="auteur">
+            <span class="error"><?php if(!empty($errors['auteur'])) { echo $errors['auteur']; } ?></span>
+
+            <?php
         $status = array(
             'draft' => 'brouillon',
             'publish' => 'Publié'
@@ -114,10 +114,10 @@ if(!empty($_POST['submitted'])) {
 
         ?>
 
-<label class="fondnoir" for="status">Status</label>
-<select  name="status">
-    <option value=""></option>
-    <?php foreach ($status as $key => $value) {
+            <label class="fondnoir" for="status">Status</label>
+            <select name="status">
+                <option value=""></option>
+                <?php foreach ($status as $key => $value) {
         $selected = '';
         if(!empty($_POST['status'])) {
             if($_POST['status'] == $key) {
@@ -126,25 +126,25 @@ if(!empty($_POST['submitted'])) {
         }
 
 ?>
- <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $value; ?></option>
-            <?php } ?>
-        </select>
-        <span class="error"><?php if(!empty($errors['status'])) { echo $errors['status']; } ?></span>
+                <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $value; ?></option>
+                <?php } ?>
+            </select>
+            <span class="error"><?php if(!empty($errors['status'])) { echo $errors['status']; } ?></span>
 
-<input  class="fondnoir " id="submit" type="submit" name="submitted" value="GO">
-</form>
+            <input class="fondnoir " id="submit" type="submit" name="submitted" value="GO">
+        </form>
 
-<script>
-  const btn =document.querySelector('#submit')
-        btn.addEventListener('click' ,aller)
+        <script>
+            const btn = document.querySelector('#submit')
+            btn.addEventListener('click', aller)
 
-        function aller(){
+            function aller() {
 
-btn.style.transform='perspective(500px) translateZ(-100px)'}
-</script>
+                btn.style.transform = 'perspective(500px) translateZ(-100px)'
+            }
+        </script>
 
-</div>
+    </div>
 </body>
+
 </html>
-
-
