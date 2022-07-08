@@ -45,7 +45,7 @@ if(!empty($_POST['submitted'])) {
         $query->bindValue(':status',$status, PDO::PARAM_STR);
         $query->bindValue(':id',$id, PDO::PARAM_INT);
         $query->execute();
-        header('Location: editpost.php');
+        header('Location: liste-articles.php');
     }
 }
 
@@ -90,15 +90,15 @@ if(!empty($_POST['submitted'])) {
         <form action="" method="POST" novalidate>
 
             <label class="fondnoir" for="title">Titre</label>
-            <input class="fondnoir" type="text" name="title" id="title" value="<?php echo $article['title'] ?>">
+            <input class="fondnoir" type="text" name="title" id="title" value="<?php echo getValue('title', $article['title']); ?>">
             <span class="error"><?php if(!empty($errors['title'])) { echo $errors['title']; } ?></span>
 
             <label class="fondnoir" for="content">Contenu</label>
-            <textarea class="fondnoir" name="content" id="content" cols="30" rows="5" style="resize:none"  ><?php echo $article['content'] ?></textarea>
+            <textarea class="fondnoir" name="content" id="content" cols="30" rows="5" style="resize:none"  ><?php echo getValue('content', $article['content']) ; ?></textarea>
             <span class="error"><?php if(!empty($errors['content'])) { echo $errors['content']; } ?></span>
 
             <label class="fondnoir " for="auteur">auteur</label>
-            <input class="fondnoir " type="text" name="auteur" id="auteur" value="<?php echo $article['auteur'] ?>">
+            <input class="fondnoir " type="text" name="auteur" id="auteur" value="<?php echo getValue('auteur', $article['auteur']) ; ?>">
             <span class="error"><?php if(!empty($errors['auteur'])) { echo $errors['auteur']; } ?></span>
 
             <?php
@@ -111,7 +111,7 @@ if(!empty($_POST['submitted'])) {
 
             <label class="fondnoir" for="status">Status</label>
             <select name="status" >
-                <option ><?php echo $article['status'] ?></option>
+                <option ><?php echo getValue('status', $article['status']) ; ?></option>
                 <?php foreach ($status as $key => $value) {
         $selected = '';
         if(!empty($_POST['status'])) {
